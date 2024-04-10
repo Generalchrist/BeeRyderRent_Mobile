@@ -89,7 +89,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 0,
     backgroundColor: 'transparent',
-    borderColor: 'transparent',
+    borderTopColor: 'transparent',
+    borderBottomColor: 'transparent',
   },
   skeleton: {
     marginBottom: 10,
