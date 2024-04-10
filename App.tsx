@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import HomeScreen from './src/Screens/Home/HomeScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import CarDetailScreen from './src/Screens/Detail/CarDetailScreen';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
+  const options = {
+    title: 'BeeRyder Rental',
+    headerStyle: {
+      backgroundColor: '#1f262e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  }
+
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Text>Manitam harika keske gelsede yesem</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} options={options} />
+        <Stack.Screen name="CarDetailScreen" component={CarDetailScreen} options={options} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
+
+export default App;
