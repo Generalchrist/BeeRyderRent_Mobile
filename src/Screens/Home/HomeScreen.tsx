@@ -1,33 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { Text, ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Card, SearchBar } from 'react-native-elements';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Image, SearchBar, Skeleton } from '@rneui/themed';
+
 import { CarDetail } from '../../Models/CarDetail';
 import { getAllCarDetails } from '../../Services/carService';
-import { Image } from 'react-native-elements/dist/image/Image';
-import { useNavigation } from '@react-navigation/native';
-import { MACHINE_URL } from '../../Services/Helpers/axiosConfig';
+import CarCard from '../../Components/CarCard';
+import { Text } from '@rneui/base';
 
 
 const HomeScreen = () => {
   const [cars, setCars] = useState<CarDetail[]>([]);
-  const navigation = useNavigation();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetchCars();
-  }, []);
+    fetchCars(search);
+  }, [search]);
 
-  const fetchCars = async () => {
+  const fetchCars = async (search: any) => {
     try {
       const response = await getAllCarDetails();
       setCars(response);
+      // if (search === "") {
+      //   const response = await getAllCarDetails();
+      //   setCars(response);
+      // } else {
+      //   // TODO: Implement search functionality to backend
+      //   const response = await getAllCarDetails();
+      //   setCars(response);
+      // }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
-
-  const handleViewDetails = (car: CarDetail) => {
-    navigation.navigate('CarDetailScreen', { car });
+  const updateSearch = (search: any) => {
+    setSearch(search);
   };
 
 
@@ -42,43 +49,35 @@ const HomeScreen = () => {
       {/* Search bar */}
       <SearchBar
         placeholder="Search"
-        round
-        autoCorrect={false}
+        round={true}
+        onChangeText={updateSearch}
+        value={search}
         inputMode='text'
         containerStyle={styles.searchBarContainer}
+        platform='default'
       />
 
       {/* Car cards */}
       <View>
-        {cars.map((car, index) => (
-          <Card key={index} containerStyle={styles.card}>
-            <Card.Image source={{ uri: MACHINE_URL + car.images[0].imagePath }} style={styles.cardImage} />
-            <Text style={styles.cardTitle}>
-              {car.brandName} {car.modelYear} {car.model}
-            </Text>
-            <Text style={{ color: '#fff' }}>
-              ${car.dailyPrice}
-            </Text>
-            <Text style={{ color: '#fff', marginBottom: 10 }}>
-              {car.description}
-            </Text>
-
-            <Button
-              title="Details"
-              buttonStyle={styles.button}
-              onPress={() => handleViewDetails(car)}
-            />
-          </Card>
-        ))}
+        {cars.length === 0 ? (
+          <View style={{ marginHorizontal: 10, marginBottom: 10 }}>
+            <Skeleton style={styles.skeleton} />
+            <Skeleton style={styles.skeleton} />
+            <Skeleton style={styles.skeleton} />
+          </View>
+        ) : (
+          cars.map((car, index) => (
+            <CarCard key={index} car={car} index={index} />
+          ))
+        )}
       </View>
-    </ScrollView>
+    </ScrollView >
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#1f262e',
-
   },
   headerImage: {
     width: '100%',
@@ -92,30 +91,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderColor: 'transparent',
   },
-  card: {
+  skeleton: {
     marginBottom: 10,
     borderRadius: 10,
     borderColor: '#334754',
-    backgroundColor: '#1f262e',
-  },
-  cardTitle: {
-    marginVertical: 10,
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#fff',
-    justifyContent: 'space-between',
-  },
-  cardImage: {
-    borderRadius: 10,
-    height: 200,
-  },
-  button: {
-    borderRadius: 10,
-    width: '50%',
-    alignSelf: 'center',
-    backgroundColor: '#1c272e',
-    borderColor: '#324654',
     borderWidth: 1,
+    borderBlockColor: '#334754',
+    height: 350,
+    opacity: 0.1,
   },
 });
 

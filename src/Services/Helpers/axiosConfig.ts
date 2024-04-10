@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
-export const MACHINE_URL = 'http://192.168.1.132:5000/';
-export const API_URL = MACHINE_URL + 'api/';
+export const MACHINE_URL = 'http://192.168.1.132:5000';
+export const API_URL = MACHINE_URL + '/api/';
 
 // Create an Axios instance with custom configuration
 const axiosInstance: AxiosInstance = axios.create({
