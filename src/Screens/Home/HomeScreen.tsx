@@ -5,6 +5,8 @@ import { CarDetail } from '../../Models/CarDetail';
 import { getAllCarDetails } from '../../Services/carService';
 import { Image } from 'react-native-elements/dist/image/Image';
 import { useNavigation } from '@react-navigation/native';
+import { MACHINE_URL } from '../../Services/Helpers/axiosConfig';
+
 
 const HomeScreen = () => {
   const [cars, setCars] = useState<CarDetail[]>([]);
@@ -50,7 +52,7 @@ const HomeScreen = () => {
       <View>
         {cars.map((car, index) => (
           <Card key={index} containerStyle={styles.card}>
-            <Card.Image source={{ uri: "http://10.0.2.2:5000/" + car.images[0].imagePath }} style={styles.cardImage} />
+            <Card.Image source={{ uri: MACHINE_URL + car.images[0].imagePath }} style={styles.cardImage} />
             <Text style={styles.cardTitle}>
               {car.brandName} {car.modelYear} {car.model}
             </Text>

@@ -1,8 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
 
+export const MACHINE_URL = 'http://192.168.1.132:5000/';
+export const API_URL = MACHINE_URL + 'api/';
+
 // Create an Axios instance with custom configuration
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://10.0.2.2:5000/api', // Set your base URL here
+  baseURL: API_URL, // Set your base URL here
   timeout: 10000, // Adjust the timeout as needed
 });
 

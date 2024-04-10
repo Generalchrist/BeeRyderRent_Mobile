@@ -4,6 +4,7 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { CarDetail } from '../../Models/CarDetail';
 import { Image } from 'react-native-elements';
+import { MACHINE_URL } from '../../Services/Helpers/axiosConfig';
 
 type CarDetailParamList = {
     CarDetailScreen: { car: CarDetail };
@@ -23,7 +24,7 @@ const CarDetailScreen: React.FC<Props> = ({ route }) => {
 
     return (
         <View>
-            <Image source={{ uri: "http://10.0.2.2:5000/" + car.images[0].imagePath }} />
+            <Image source={{ uri: MACHINE_URL + car.images[0].imagePath }} />
             <Text>Car Details</Text>
             <Text>{car.model} - {car.modelYear}</Text>
             <Text>{car.brandName}</Text>
