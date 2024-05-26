@@ -71,7 +71,7 @@ const ProfileScreen = () => {
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.profileContainer}>
                 <Image
-                    source={require('../../../assets/vettelim.jpg')}
+                    source={{ uri: 'https://i.imgur.com/6leloar.jpeg' }}
                     style={styles.profileImage}
                 />
                 <Text style={styles.fullName}>{userData.fullName}</Text>

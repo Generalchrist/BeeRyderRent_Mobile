@@ -106,7 +106,7 @@ const CarDetailScreen: React.FC<Props> = ({ route }) => {
             <View style={{ margin: 10 }}>
                 <Image source={{ uri: MACHINE_URL + car.images[0].imagePath }} style={styles.image} />
                 <Card containerStyle={styles.card}>
-                    <Image source={require('../../../assets/logo.png')} style={styles.logo} />
+                    <Image source={{uri : "https://i.imgur.com/J0jhdl3.png"}} style={styles.logo} />
                     <Text style={styles.title}>{car.modelYear} {car.brandName} {car.model}</Text>
                     <Text style={styles.text}>Brand: {car.brandName}</Text>
                     <Text style={styles.text}>Color: {car.colorName}</Text>

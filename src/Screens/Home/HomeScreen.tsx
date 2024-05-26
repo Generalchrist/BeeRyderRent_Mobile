@@ -9,7 +9,7 @@ import { Text } from '@rneui/base';
 
 
 const HomeScreen = () => {
-  const [cars, setCars] = useState<CarDetail[]>([]);
+  let [cars, setCars] = useState<CarDetail[]>([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -18,23 +18,22 @@ const HomeScreen = () => {
 
   const fetchCars = async (search: any) => {
     try {
-      const response = await getAllCarDetails();
-      setCars(response);
-      // if (search === "") {
-      //   const response = await getAllCarDetails();
-      //   setCars(response);
-      // } else {
-      //   // TODO: Implement search functionality to backend
-      //   const response = await getAllCarDetails();
-      //   setCars(response);
-      // }
+      if (search === "") {
+        const response = await getAllCarDetails();
+        setCars(response);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
   const updateSearch = (search: any) => {
+    console.log(search);
     setSearch(search);
+    cars = cars.filter((car) => {
+      return car.brandName.toLowerCase().includes(search.toLowerCase());
+    });
+    setCars(cars);
   };
 
 
@@ -42,7 +41,7 @@ const HomeScreen = () => {
     <ScrollView style={styles.container}>
       {/* Image header */}
       <Image
-        source={require('../../../assets/vettelim.jpg')}
+        source={{ uri: 'https://i.imgur.com/6leloar.jpeg' }}
         style={styles.headerImage}
       />
 

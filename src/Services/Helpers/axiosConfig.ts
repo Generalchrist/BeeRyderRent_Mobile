@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
-export const MACHINE_URL = 'http://10.0.2.2:47376';
+// export const MACHINE_URL = 'http://10.0.2.2:47376'; //android emulator
+export const MACHINE_URL = 'http://172.20.10.4:5000'; //iphone test
 export const API_URL = MACHINE_URL + '/api/';
 
 // Create an Axios instance with custom configuration

@@ -29,7 +29,7 @@ const App = () => {
     headerTintColor: '#fff',
     headerRight: () => (
       <Image
-        source={require('./assets/minilogo.png')}
+        source={{ uri: 'https://i.imgur.com/aioQO8H.png' }}
         style={{ width: 40, height: 40, margin: 10, borderRadius: 40, overflow: 'hidden' }}
         onPress={() => navigation.navigate('Profile')}
       />

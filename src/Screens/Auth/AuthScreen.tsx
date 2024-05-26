@@ -52,7 +52,7 @@ const AuthScreen = () => {
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.form}>
                 <Image
-                    source={require('../../../assets/vettelim.jpg')}
+                    source={{ uri: 'https://i.imgur.com/6leloar.jpeg' }}
                     style={styles.headerImage}
                 />
                 {isRegister && (
