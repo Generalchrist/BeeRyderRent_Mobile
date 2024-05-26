@@ -63,11 +63,11 @@ const CarDetailScreen: React.FC<Props> = ({ route }) => {
                         rentDate: rentDate,
                         returnDate: returnDate
                     }
-                    
+
                     postRental(rentalModel).then((response) => {
-                        if(response.success){
+                        if (response.success) {
                             Alert.alert('Rent Successful', `You rented ${car.modelYear} ${car.brandName} ${car.model} from ${rentDate.toDateString()} to ${returnDate.toDateString()}`);
-                        }else{
+                        } else {
                             Alert.alert('Rent Failed', 'Something went wrong');
                         }
                     }).catch((error) => {
@@ -106,7 +106,7 @@ const CarDetailScreen: React.FC<Props> = ({ route }) => {
             <View style={{ margin: 10 }}>
                 <Image source={{ uri: MACHINE_URL + car.images[0].imagePath }} style={styles.image} />
                 <Card containerStyle={styles.card}>
-                    <Image source={{uri : "https://i.imgur.com/J0jhdl3.png"}} style={styles.logo} />
+                    <Image source={{ uri: "https://i.imgur.com/J0jhdl3.png" }} style={styles.logo} />
                     <Text style={styles.title}>{car.modelYear} {car.brandName} {car.model}</Text>
                     <Text style={styles.text}>Brand: {car.brandName}</Text>
                     <Text style={styles.text}>Color: {car.colorName}</Text>
@@ -116,13 +116,14 @@ const CarDetailScreen: React.FC<Props> = ({ route }) => {
                     <Text style={styles.text}>Description: {car.description}</Text>
                 </Card>
                 <Card containerStyle={styles.card}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ alignItems: "center" }}>
                         <Button title="Select Rent Date" onPress={() => setShowRentDatePicker(true)} buttonStyle={styles.button} />
                         {renderDateTimePicker(showRentDatePicker, rentDate, handleRentDateChange)}
                         <Button title="Select Return Date" onPress={() => setShowReturnDatePicker(true)} buttonStyle={styles.button} />
                         {renderDateTimePicker(showReturnDatePicker, returnDate, handleReturnDateChange)}
+                        <Button title="Rent" onPress={() => handleRent()} buttonStyle={{ ...styles.button, width: '100%' }} />
                     </View>
-                    <Button title="Rent" onPress={() => handleRent()} buttonStyle={{ ...styles.button, width: '100%' }} />
+
                 </Card>
 
             </View>

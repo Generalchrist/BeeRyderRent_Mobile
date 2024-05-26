@@ -28,7 +28,6 @@ const HomeScreen = () => {
   };
 
   const updateSearch = (search: any) => {
-    console.log(search);
     setSearch(search);
     cars = cars.filter((car) => {
       return car.brandName.toLowerCase().includes(search.toLowerCase());
